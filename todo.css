@@ -1,0 +1,148 @@
+/* General Body Styling */
+body {
+    font-family: Iceland,Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    min-height: 100vh; /* Full screen height */
+}
+
+h1 {
+    margin: 2vh 0;
+    font-size: 2.5vw;
+    color: #f3f3f3; /* Vibrant cyan title */
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3vh;
+    width: 90%;
+    max-width: 500px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 1vh;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: #1f1f1f; /* Dark input background */
+    color: #ffffff;
+    box-shadow: 0 0 5px #007bff;
+}
+
+button {
+    padding: 1vh 2vw;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#add {
+    background-color: #007bff; /* Vibrant blue */
+    color: #ffffff;
+}
+
+#add:hover {
+    background-color: #00d4ff; /* Brighter hover */
+    color: #121212;
+}
+
+/* Task List Styling */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 500px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vh;
+    padding: 1vh 2vw;
+    background-color: #1f1f1f; /* Dark card */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+li span {
+    color: #ffffff; /* Light task text */
+}
+
+.completed span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Task Buttons */
+.task-buttons {
+    display: flex;
+}
+
+.task-buttons button {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+    margin-left: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-buttons button.done {
+    background-color: #28a745; /* Green for done */
+    color: #ffffff;
+}
+
+.task-buttons button.delete {
+    background-color: #dc3545; /* Red for delete */
+    color: #ffffff;
+}
+
+.task-buttons button:hover {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+/* Icons for Buttons */
+.task-buttons button.done::before {
+    content: "✔";
+    margin-right: 0.5em;
+}
+
+.task-buttons button.delete::before {
+    content: "🗑";
+    margin-right: 0.5em;
+}
+
+/* Hover Effects */
+.task-buttons button.done:hover {
+    box-shadow: 0 0 8px #28a745;
+}
+
+.task-buttons button.delete:hover {
+    box-shadow: 0 0 8px #dc3545;
+}
+
+input:focus {
+    box-shadow: 0 0 8px #00d4ff;
+}
+.iceland-regular {
+    font-family: "Iceland", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
