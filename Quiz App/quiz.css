@@ -1,0 +1,171 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #333;
+    color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Typewriter Effect */
+@keyframes typewriter {
+    from {
+        max-width: 0;
+    }
+    to {
+        max-width: 100%;
+    }
+}
+
+@keyframes blinkCursor {
+    from {
+        border-right-color: transparent;
+    }
+    to {
+        border-right-color: black;
+    }
+}
+
+#questions {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid black; /* Cursor effect */
+    max-width: 0; /* Initially hidden */
+    animation: typewriter 2s steps(40, end), blinkCursor 0.5s step-end infinite;
+    animation-fill-mode: forwards;
+}
+
+/* Options Container */
+#options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Option Styling */
+#options label {
+    flex: 1 1 calc(50% - 10px); /* Two options per row */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+    border: 2px solid #e9e9e9;
+    border-radius: 25px;
+    background-color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#options label:hover {
+    color: #333;
+    background-color: #e0e0e0;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Hidden Radio Buttons */
+#options input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+/* Selected Option Styling */
+#options input[type="radio"]:checked + label {
+    background-color: #333;
+    color: white;
+    border-color: #4CAF50;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Next Button */
+#next {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: 2px solid #e9e9e9;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#next:hover {
+    background-color: #555;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    #options label {
+        flex: 1 1 calc(100% - 20px); /* Full width for small screens */
+        font-size: 1em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #questions {
+        font-size: 1.2em;
+    }
+
+    #next {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    #options label {
+        flex: 1 1 calc(100% - 10px); /* Full width for mobile devices */
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #questions {
+        font-size: 1em;
+    }
+
+    #next {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+}

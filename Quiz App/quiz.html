@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <h1>Quiz App</h1>
+    
+    <div>
+        <p id="questions">Would you like to start the quiz?</p>
+        <div id="options"></div>
+        <button id="next" onclick="nextQuestion()">Start</button>
+    </div>
+
+    <script>
+        let quizData = [
+            {
+                question: "1. What is the color of the sky on a clear day?",
+                options: ["Blue", "Red", "Green", "Yellow"],
+                correct: "Blue"
+            },
+            {
+                question: "2. Which fruit is typically yellow when ripe?",
+                options: ["Apple", "Banana", "Grapes", "Cherry"],
+                correct: "Banana"
+            },
+            {
+                question: "3. Which animal is known as the King of the Jungle?",
+                options: ["Lion", "Elephant", "Tiger", "Bear"],
+                correct: "Lion"
+            },
+            {
+                question: "4. How many legs does a spider have?",
+                options: ["6", "8", "10", "12"],
+                correct: "8"
+            },
+            {
+                question: "5. What is 2 + 2?",
+                options: ["3", "4", "5", "6"],
+                correct: "4"
+            },
+            {
+                question: "6. Which shape has three sides?",
+                options: ["Circle", "Square", "Triangle", "Rectangle"],
+                correct: "Triangle"
+            },
+            {
+                question: "7. What is the name of the planet we live on?",
+                options: ["Mars", "Earth", "Jupiter", "Saturn"],
+                correct: "Earth"
+            },
+            {
+                question: "8. What do bees produce?",
+                options: ["Milk", "Honey", "Silk", "Wool"],
+                correct: "Honey"
+            },
+            {
+                question: "9. What is the opposite of hot?",
+                options: ["Cold", "Warm", "Spicy", "Sweet"],
+                correct: "Cold"
+            },
+            {
+                question: "10. Which animal says 'Meow'?",
+                options: ["Dog", "Cat", "Cow", "Horse"],
+                correct: "Cat"
+            }
+        ];
+
+        let index = 0;
+        let score = 0;
+
+        function nextQuestion() {
+    let selectedOption = document.querySelector('input[name="quizOption"]:checked');
+    if (index > 0 && selectedOption) {
+        if (selectedOption.value === quizData[index - 1].correct) {
+            score++;
+        }
+    } else if (index > 0) {
+        alert("Please select an option before proceeding!");
+        return; 
+    }
+
+    if (index < quizData.length) {
+        const questionElement = document.getElementById("questions");
+        questionElement.innerHTML = quizData[index].question;
+
+        questionElement.style.animation = "none";
+        setTimeout(() => {
+            questionElement.style.animation = "";
+        }, 10); 
+
+        let optionContainer = document.getElementById("options");
+        optionContainer.innerHTML = "";
+
+        quizData[index].options.forEach(option => {
+        const optionElement = document.createElement("div");
+        optionElement.innerHTML = `
+        <input type="radio" id="${option}" name="quizOption" value="${option}">
+        <label for="${option}">${option}</label>
+        `;
+        optionContainer.appendChild(optionElement);
+    });
+
+
+        document.getElementById("next").innerHTML = "Next";
+        index++;
+    } else {
+        document.getElementById("questions").innerHTML = `Your score is ${score} out of ${quizData.length}.`;
+        document.getElementById("next").style.display = "none";
+        document.getElementById("options").style.display = "none";
+    }
+}
+
+    </script>
+</body>
+</html>
