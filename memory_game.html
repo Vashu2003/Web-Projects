@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="memory_game.css">
+</head>
+<body>
+    <h1>Flip The card</h1>
+    <div class="game-container">
+        <div class="game-board" id="game-board"></div>
+        <div class="game-info">
+            <h3 id="win-msg"></h3>
+            <p id="time">Time: 0</p>
+            <p id="moves">Moves: 0</p>
+        </div>
+        <button id="restart-btn">Restart Game</button>
+    </div>
+    <script>
+        let gameBoard = document.getElementById('game-board');
+        let restartButton = document.getElementById('restart-btn');
+        let timeDisplay = document.getElementById('time');
+        let movesDisplay = document.getElementById('moves');
+
+        const cardValues = ['🍎', '🍌', '🍍', '🍓', '🍉', '🍇', '🍎', '🍌', '🍍', '🍓', '🍉', '🍇'];
+        let timer, moves = 0, time = 0;
+        let flippedCards = [];
+        let matchedCards = 0;
+
+        function shuffle(array) {
+            let shuffledArray = array.slice();
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            return shuffledArray;
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                time++;
+                timeDisplay.textContent = "Time: "+time;
+            }, 1000);
+            
+            
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            document.getElementById('win-msg').innerHTML = "You win in " +time+" seconds and "+moves+" moves";
+            document.getElementById('time').style.display = 'none';
+            document.getElementById('moves').style.display = 'none';
+        }
+
+        function createCards() {
+            let shuffledValues = shuffle(cardValues);
+            gameBoard.innerHTML = '';
+            shuffledValues.forEach(value => {
+                let card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = 
+                `<div class="card-inner">
+                    <div class="card-back"></div>
+                    <div class="card-front">${value}</div>
+                </div>`;
+                gameBoard.appendChild(card);
+                card.addEventListener('click', flipCard);
+            });
+        }
+
+        function flipCard() {
+            if (flippedCards.length === 2 || this.classList.contains('flipped')) return;
+
+            this.classList.add('flipped');
+            flippedCards.push(this);
+            moves++;
+            movesDisplay.textContent = `Moves: ${moves}`;
+            if (flippedCards.length === 2) {
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            let [firstCard, secondCard] = flippedCards;
+            let firstCardValue = firstCard.querySelector('.card-front').textContent;
+            let secondCardValue = secondCard.querySelector('.card-front').textContent;
+
+            if (firstCardValue === secondCardValue) {
+                matchedCards++;
+                flippedCards = [];
+                if (matchedCards === cardValues.length / 2) {
+                    stopTimer();
+                }
+            } else {
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        restartButton.addEventListener('click', () => {
+            // matchedCards = 0;
+            // flippedCards = [];
+            // moves = 0;
+            // time = 0;
+            // movesDisplay.textContent = `Moves: ${moves}`;
+            // timeDisplay.textContent = `Time: ${time}`;
+            // document.getElementById('time').innerHTML = "Time: "+time;
+            // document.getElementById('moves').innerHTML = "Moves: "+moves;
+            // document.getElementById('win-msg').style.display = 'none';
+            
+            // stopTimer();
+            // startTimer();
+            // createCards();
+            location.reload();
+        });
+
+        // Initialize the game on first load
+        startTimer();
+        createCards();
+    </script>
+</body>
+</html>
